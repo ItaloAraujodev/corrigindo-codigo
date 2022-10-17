@@ -31,9 +31,11 @@ app.post("/repositories", (request, response) => {
 app.put("/repositories/:id", (request, response) => {
   const { id } = request.params;
   const updatedRepository = request.body;
+  delete updatedRepository.likes;
 
   const repositoryIndex = repositories.findIndex(repository => repository.id === id);
-  console.log(repositoryIndex)
+
+
   if (repositoryIndex < 0) {
     return response.status(404).json({ error: "Repository not found" });
   }
